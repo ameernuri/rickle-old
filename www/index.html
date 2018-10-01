@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="tinker" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+	<title>Rickle</title>
+
+	<link rel="shortcut icon" href="img/favicon.png">
+
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" media="screen" charset="utf-8">
+
+	<link rel="stylesheet" href="lib/ionic/release/css/ionic.min.css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="css/main.css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" media="screen" charset="utf-8">
+
+	<script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/ionic/release/js/ionic.bundle.min.js"></script>
+	<script type="text/javascript" src="lib/pouchdb/dist/pouchdb.min.js"></script>
+	<script type="text/javascript" src="lib/sugar/release/sugar.min.js"></script>
+	<script type="text/javascript" src="lib/moment/min/moment.min.js"></script>
+	<script type="text/javascript" src="lib/angular-pouchdb/angular-pouchdb.min.js"></script>
+	<script type="text/javascript" src="lib/pouchdb-authentication/dist/pouchdb.authentication.min.js"></script>
+	<script type="text/javascript" src="lib/angular-moment/angular-moment.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="js/tinker.js"></script>
+	<script type="text/javascript" src="js/controllers/games.js"></script>
+	<script type="text/javascript" src="js/controllers/users.js"></script>
+	<script type="text/javascript" src="js/filters.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/directives.js"></script>
+</head>
+<body ng-controller="GamesCtrl">
+
+  <div class="loader-container" ng-show="playingGames == undefined">
+  	<div class="loader-content">
+  		<img src="img/splash_logo.svg">
+  	</div>
+  </div>
+
+  <ion-side-menus ng-show="playingGames!= undefined">
+    <ion-side-menu-content>
+      <ion-header-bar class="main-header">
+        <button class="button button-clear left-sidebar-switch" menu-toggle="left" ng-hide="$exposeAside.active || isLeftSideBarOpen()">
+					<img src="img/hamburger.svg">
+				</button>
+
+			  <h1 class="title" ng-click="setCurrentGame(&apos;_endgame&apos;)">
+					<img class="logo" src="img/logo.svg" ng-show="currentGame._id == &apos;_endgame&apos;">
+					<img class="logo" src="img/logo_icon.svg" ng-show="currentGame._id != &apos;_endgame&apos;">
+				</h1>
+
+				<button class="button button-clear prio-switch" menu-toggle="right" ng-hide="$exposeAside.active || isRightSideBarOpen()">
+					<img src="img/priority.svg">
+				</button>
+      </ion-header-bar>
+
+      <ion-content class="main-content">
+				<script id="signInModal.html" type="text/ng-template">
+			  	<div class="modal">
+			  	  <ion-header-bar>
+			  	    <h1 class="title" ng-click="hideModal()">Sign In</h1>
+
+        			<button class="button button-clear button-primary" ng-click="modal.hide()">
+        				&times;
+      				</button>
+			  	  </ion-header-bar>
+
+			  	  <ion-content>
+				  	  <div ng-controller="UsersCtrl">
+					  	  <form method="post" ng-submit="signIn()">
+								  <div class="list">
+								    <label class="item item-input item-floating-label">
+								      <span class="input-label">Your Email</span>
+								      <input
+								      	type="text"
+								      	placeholder="you@example.com"
+								      	ng-model="signInEmail"
+								      >
+								    </label>
+								    <label class="item item-input item-floating-label">
+								      <span class="input-label">Password</span>
+								      <input
+								      	type="password"
+								      	placeholder="Your Password"
+								      	ng-model="signInPassword"
+								      >
+								    </label>
+
+								    <div class="item input-item">
+								    	<input type="submit" value="Sign In">
+								    </div>
+
+								    <div class="item input-item alt-switch">
+								    	Not Yet a Member?
+								    	<button ng-click="signUpModal.show()">Create an Account</button>
+								    </div>
+								  </div>
+						  	</form>
+				  	  </div>
+			  	  </ion-content>
+			  	</div>
+				</script>
+
+				<script id="signUpModal.html" type="text/ng-template">
+			  	<div class="modal">
+			  	  <ion-header-bar>
+			  	    <h1 class="title" ng-click="hideModal()">Create Account</h1>
+
+        			<button class="button button-clear button-primary" ng-click="modal.hide()">
+        				&times;
+      				</button>
+			  	  </ion-header-bar>
+			  	  <ion-content>
+			  	  	<div ng-controller="UsersCtrl">
+					  	  <form method="post" ng-submit="signUp()">
+								  <div class="list">
+								    <label class="item item-input item-floating-label">
+								      <span class="input-label">Your Email</span>
+								      <input
+								      	type="email"
+								      	placeholder="you@example.com"
+								      	ng-model="signUpEmail"
+								      >
+								    </label>
+								    <label class="item item-input item-floating-label">
+								      <span class="input-label">New Password</span>
+								      <input
+								      	type="password"
+								      	placeholder="New Password"
+								      	ng-model="signUpPassword"
+								      >
+								    </label>
+
+								    <div class="item input-item">
+								    	<input type="submit" value="Create Account">
+								    </div>
+
+								    <div class="item input-item alt-switch">
+								    	Already a Member?
+								    	<button ng-click="signInModal.show()">Sign In</button>
+								    </div>
+								  </div>
+								</form>
+			  	  	</div>
+			  	  </ion-content>
+			  	</div>
+				</script>
+
+				<div ng-include="" src="&apos;templates/content.html&apos;"></div>
+      </ion-content>
+    </ion-side-menu-content>
+
+		<ion-side-menu expose-aside-when="(min-width: 660px)" side="right" on-swipe-right="toggleRightMenu()" ng-include="" src="&apos;templates/rightSideBar.html&apos;">
+		</ion-side-menu>
+
+		<ion-side-menu expose-aside-when="(min-width: 900px)" side="left" on-swipe-left="toggleLeftMenu()" ng-include="" src="&apos;templates/leftSideBar.html&apos;">
+		</ion-side-menu>
+  </ion-side-menus>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<div ng-show="currentGame._id != '_endgame'" class="game-path-wrap">
+	<!-- <span ng-click="setCurrentGame('_endgame')" class="game-path">
+		<span class="fa fa-stop end-icon"></span> End Games
+	</span> -->
+
+	<ul class="path-list">
+		<li 
+			ng-click="setCurrentGame('_endgame')" 
+			class="end-game"
+			ng-class="{parentPath: currentGame.parent == '_endgame'}"
+		>
+			<span class="fa fa-stop end-icon"></span> End Games
+		</li>
+		<li 
+			ng-repeat="path in currentPath"
+			ng-click="setCurrentGame(path._id)"
+			ng-class="{parentPath: currentGame.parent == path._id}"
+    >
+			<span 
+				class="path-content"
+				ng-class="{
+					past: isPast(path.plays[path.plays.length-1].end),
+					won: path.plays[path.plays.length-1].state == 'won',
+					lost: path.plays[path.plays.length-1].state == 'lost'
+				}"
+			>
+				<span ng-show="path.plays[path.plays.length-1].state == 'won'" class="ion-checkmark-circled chevron"></span>
+				<span ng-show="path.plays[path.plays.length-1].state == 'lost'" class="ion-close-circled chevron"></span>
+				<span ng-show="path.plays[path.plays.length-1].state == 'playing'" class="ion-record chevron"></span>
+				{{path.game}}
+			</span>
+		</li>
+	</ul>
+</div>

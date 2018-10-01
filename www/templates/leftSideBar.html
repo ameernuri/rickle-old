@@ -1,0 +1,46 @@
+<ion-header-bar class="side-header left-side">
+  <h1 class="title" ng-click="setCurrentGame('_endgame'); modal.hide();" menu-toggle="left">
+		<div class="is-online">
+			<div>
+				<span ng-show="online">
+					<span class="indicator online fa fa-circle"></span>
+
+					<span>
+						Online
+					</span>
+				</span>
+
+				<span ng-hide="online">
+					<span class="indicator offline fa fa-circle"></span>
+
+					<span>
+						Offline
+					</span>
+				</span>
+
+				<span ng-controller="UsersCtrl">
+					<span
+						class="online-message signed-in"
+					>
+					</span>
+
+					<span >
+					</span>
+				</span>
+			</div>
+		</div>
+	</h1>
+</ion-header-bar>
+
+<ion-content class="left-container">
+	<ul>
+		<li>
+			<span class="ion-happy"></span>
+			Ameer Nuri
+		</li>
+		<li>
+			<span class="ion-trash-a"></span>
+			Trash
+		</li>
+	</ul>
+</ion-content>

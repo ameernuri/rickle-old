@@ -1,0 +1,77 @@
+<span class="game">
+	<span class="priority-wrap">
+		<span ng-show="game.doc.plays[game.doc.plays.length-1].priority == '8'" class="priority">
+			<span class="fa fa-circle icon high"></span>
+		</span>
+		<span ng-show="game.doc.plays[game.doc.plays.length-1].priority == '4'" class="priority">
+			<span class="fa fa-dot-circle-o icon mid"></span>
+		</span>
+		<span ng-show="game.doc.plays[game.doc.plays.length-1].priority == '2'" class="priority">
+			<span class="fa fa-circle-o icon low"></span>
+		</span>
+	</span>
+
+	<span
+		class="due-tag"
+		ng-show="
+		isDueToday(game.doc.plays[game.doc.plays.length-1].end)
+		&& game.doc.plays[game.doc.plays.length-1].state == 'playing'
+	">
+		Due Today
+	</span>
+
+	<span
+		class="due-tag due-past"
+		ng-show="
+		isDuePast(game.doc.plays[game.doc.plays.length-1].end)
+		&& game.doc.plays[game.doc.plays.length-1].state == 'playing'
+	">
+		Due Past
+	</span>
+
+	{{game.doc.game}}
+</span>
+
+<span
+	class="state-wrap"
+	on-tap="showStateButtons($event)"
+	ng-mouseover="showStateButtons($event)"
+	ng-mouseleave="hideStateButtons($event)"
+	ng-class="{wait: game.doc.wait}"
+>
+	<span class="touch-block"></span>
+	<span ng-class="{active: game.doc.plays[game.doc.plays.length-1].state == 'lost'}" class="state lost" ng-click="setState(game.doc._id, 'lost')">
+		<span class="ion-close"></span>
+	</span>
+	<span ng-class="{active: game.doc.plays[game.doc.plays.length-1].state == 'playing'}" class="state playing">
+	</span>
+	<span ng-class="{active: game.doc.plays[game.doc.plays.length-1].state == 'won'}" class="state won" ng-click="setState(game.doc._id, 'won')">
+		<span class="ion-checkmark"></span>
+	</span>
+</span>
+
+<div class="info-wrap">
+	<span class="time-wrap">
+
+		<span
+			class="ion-ios-rewind past-icon"
+			ng-show="
+				isPast(game.doc.plays[game.doc.plays.length-1].end)
+				&& game.doc.plays[game.doc.plays.length-1].state == 'playing'
+			"
+		></span>
+		<span class="text" am-time-ago="game.doc.plays[game.doc.plays.length-1].end"></span>
+
+		<span ng-show="game.doc.repeat != '' && game.doc.repeat != undefined && game.doc.repeat != false">
+			<span class="ion-android-sync"></span> {{game.doc.repeat | repeatTime}}
+			{{game.doc.end | relativeTime }}
+		</span>
+	</span>
+
+	<span ng-show="game.doc.plays.length > 1">
+		&bull;
+
+		<span class="fa fa-rotate-right replay-icon"></span>
+		{{game.doc.plays.length}}
+	</span>
+</div>

@@ -1,0 +1,22 @@
+{
+  "name": "tinker",
+  "version": "0.0.1",
+  "description": "The Tinker App",
+  "main": "app.js",
+  "author": "Ameer Nuri",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "ionic-native-transitions": "^1.0.0-rc9",
+    "less": "^2.5.3",
+    "less-middleware": "^2.0.1"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "devDependencies": {
+    "@ionic/v1-toolkit": "1.0.7",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^1.0.0"
+  }
+}
