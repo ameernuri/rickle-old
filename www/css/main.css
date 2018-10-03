@@ -1983,7 +1983,7 @@
   background: #1e2328;
 }
 .bar.bar-header.side-header.left-side {
-  background: #22282e;
+  background: #111417;
 }
 .bar.bar-header.side-header h1 {
   text-align: left;
@@ -3805,4 +3805,12 @@ input {
   font-style: italic;
   color: #57626d;
   padding: 20px 10px;
+}
+
+.menu-content.pane {
+	box-shadow: none;
+}
+
+.left-container .scroll {
+	opacity: 0;
 }
