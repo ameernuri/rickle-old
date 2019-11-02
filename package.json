@@ -6,7 +6,7 @@
   "author": "Ameer Nuri",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "ejs": "^2.3.4",
+    "ejs": "^2.5.5",
     "express": "^4.16.3",
     "ionic-native-transitions": "^1.0.0-rc9",
     "less": "^2.5.3",
