@@ -16,8 +16,8 @@
     "start": "node app.js"
   },
   "devDependencies": {
-    "@ionic/v1-toolkit": "1.0.7",
-    "grunt": "^0.4.5",
+    "@ionic/v1-toolkit": "3.2.20",
+    "grunt": "^1.5.3",
     "grunt-contrib-jshint": "^1.0.0"
   }
 }
